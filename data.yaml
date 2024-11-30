@@ -1,0 +1,5 @@
+train: ./train/images # 使用完整相对路径
+val: ./val/images # 使用完整相对路径
+
+# 类别数量和名称
+names: ["none", "fengxi", "kong"] # 类别名称
