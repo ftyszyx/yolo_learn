@@ -1,3 +1,6 @@
+import os
+
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from ultralytics import YOLO
 import cv2
 import numpy as np
@@ -5,7 +8,7 @@ import numpy as np
 
 def detect_cracks(image_path):
     # 加载训练好的模型
-    model = YOLO("runs/detect/crack_detection9/weights/best.pt")
+    model = YOLO("runs/detect/crack_detection14/weights/best.pt")
 
     # 读取图片
     image = cv2.imread(image_path)
