@@ -1,5 +1,6 @@
-train: ./train/images # 使用完整相对路径
-val: ./val/images # 使用完整相对路径
+train: ./train/images # 修正训练集路径
+val: ./val/images # 修正验证集路径
 
 # 类别数量和名称
+nc: 3 # 添加类别数量
 names: ["none", "fengxi", "kong"] # 类别名称

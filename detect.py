@@ -5,7 +5,7 @@ import numpy as np
 
 def detect_cracks(image_path):
     # 加载训练好的模型
-    model = YOLO("runs/detect/crack_detection14/weights/best.pt")
+    model = YOLO("runs/detect/crack_detection9/weights/best.pt")
 
     # 读取图片
     image = cv2.imread(image_path)
@@ -27,11 +27,14 @@ def detect_cracks(image_path):
             # 获取置信度
             conf = float(box.conf[0])
 
+            cls = int(box.cls[0])  # 获取类别ID
+            class_name = result.names[cls]  # 获取类别名称
+
             # 绘制边界框
             cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
 
             # 添加标签
-            label = f"Crack {conf:.2f}"
+            label = f"{class_name} {conf:.2f}"
             cv2.putText(image, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
     # 保存结果
