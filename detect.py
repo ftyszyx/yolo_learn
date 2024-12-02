@@ -8,7 +8,7 @@ import numpy as np
 
 def detect_cracks(image_path):
     # 加载训练好的模型
-    model = YOLO("runs/detect/crack_detection2/weights/best.pt")
+    model = YOLO("runs/detect/crack_detection3/weights/best.pt")
 
     # 读取图片
     image = cv2.imread(image_path)
