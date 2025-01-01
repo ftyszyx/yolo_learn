@@ -3,13 +3,15 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 
-def prepare_dataset(pics_dir="pics", labels_dir="pics"):
+def prepare_dataset(pics_dir="pics", labels_dir="pics", max_val_num=100):
     """准备训练数据集"""
     # 获取当前工作目录
     current_dir = os.getcwd()
     
     # 创建dataset目录及其子目录
-    dataset_dir = os.path.join(current_dir, "dataset")
+    dataset_dir = os.path.join(current_dir, "datasets")
+    if os.path.exists(dataset_dir):
+        shutil.rmtree(dataset_dir)
     train_images_dir = os.path.join(dataset_dir, "train", "images")
     train_labels_dir = os.path.join(dataset_dir, "train", "labels")
     val_images_dir = os.path.join(dataset_dir, "val", "images")
@@ -28,7 +30,10 @@ def prepare_dataset(pics_dir="pics", labels_dir="pics"):
             # 检查是否有对应的标注文件
             label_file = os.path.join(labels_dir, os.path.splitext(f)[0] + ".txt")
             if os.path.exists(label_file):
-                image_files.append(f)
+                if len(image_files) < max_val_num:
+                    image_files.append(f)
+                else:
+                    break
 
     if not image_files:
         print("错误：没有找到已标注的图片！请先使用LabelImg进行标注。")
@@ -75,4 +80,6 @@ def prepare_dataset(pics_dir="pics", labels_dir="pics"):
 
 
 if __name__ == "__main__":
-    prepare_dataset()
+
+    # prepare_dataset(os.path.join(os.getcwd(), "../datasets/test/images"), os.path.join(os.getcwd(), "../datasets/test/labels"))
+    prepare_dataset(os.path.join(os.getcwd(), "../datasets/coco/images/train2017"), os.path.join(os.getcwd(), "../datasets/coco/labels/train2017"), max_val_num=1000)

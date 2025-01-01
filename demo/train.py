@@ -18,7 +18,7 @@ def train_model():
     # 开始训练
     results = model.train(
         data="data.yaml",
-        epochs=100,  # 增加训练轮数
+        epochs=50,  # 增加训练轮数
         imgsz=1280,  # 增加图片尺寸
         batch=8,  # 减小batch size以适应更大的模型
         name="crack_detection",
@@ -26,6 +26,8 @@ def train_model():
         lr0=0.001,  # 降低初始学习率
         lrf=0.0001,  # 降低最终学习率
         conf=0.001,  # 降低置信度阈值，训练时检测更多目标
+
+        # hsv_h=0.015,  # 增加hsv_h以增加颜色变化
     )
 
     print("训练完成！")
