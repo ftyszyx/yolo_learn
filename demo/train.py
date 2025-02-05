@@ -13,14 +13,14 @@ def train_model():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     # 使用更大的模型
-    model = YOLO("yolo11n.pt")  # 从n改为m，使用更大的模型
+    model = YOLO("yolov5l.pt")  # 从n改为m，使用更大的模型
 
     # 开始训练
     results = model.train(
         data="data.yaml",
-        epochs=50,  # 增加训练轮数
+        epochs=100,  # 增加训练轮数
         imgsz=1280,  # 增加图片尺寸
-        batch=8,  # 减小batch size以适应更大的模型
+        batch=10,  # 减小batch size以适应更大的模型
         name="crack_detection",
         # 学习率调整
         lr0=0.001,  # 降低初始学习率

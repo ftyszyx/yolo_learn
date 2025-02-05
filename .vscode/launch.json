@@ -5,12 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "debug python",
+      "name": "train",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/demo_coco/train.py",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}/demo_coco"
+    },
+    {
+      "name": "export",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/export_to_labeling.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

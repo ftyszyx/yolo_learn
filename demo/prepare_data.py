@@ -7,7 +7,7 @@ def prepare_dataset(pics_dir="pics", labels_dir="pics", max_val_num=100):
     """准备训练数据集"""
     # 获取当前工作目录
     current_dir = os.getcwd()
-    
+
     # 创建dataset目录及其子目录
     dataset_dir = os.path.join(current_dir, "datasets")
     if os.path.exists(dataset_dir):
@@ -81,5 +81,5 @@ def prepare_dataset(pics_dir="pics", labels_dir="pics", max_val_num=100):
 
 if __name__ == "__main__":
 
-    # prepare_dataset(os.path.join(os.getcwd(), "../datasets/test/images"), os.path.join(os.getcwd(), "../datasets/test/labels"))
-    prepare_dataset(os.path.join(os.getcwd(), "../datasets/coco/images/train2017"), os.path.join(os.getcwd(), "../datasets/coco/labels/train2017"), max_val_num=1000)
+    prepare_dataset(os.path.join(os.getcwd(), "../datasets/test2/images"), os.path.join(os.getcwd(), "../datasets/test2/labels"))
+    # prepare_dataset(os.path.join(os.getcwd(), "../datasets/coco/images/train2017"), os.path.join(os.getcwd(), "../datasets/coco/labels/train2017"), max_val_num=1000)
