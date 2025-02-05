@@ -125,11 +125,14 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
             for annotation in annotations:
                 label_studio_json["shapes"].append(annotation)
             json.dump(label_studio_json, open(label_full_path, "w"), indent=4)
-            shutil.copyfile(image_path, os.path.join(g_output_dir, image_name))
+            shutil.copyfile(image_path, os.path.join(
+                out_dir, out_prefix+"_"+image_name))
             shutil.copyfile(label_full_path, os.path.join(
-                g_output_dir, label_file_name))
+                out_dir, out_prefix+"_"+label_file_name))
             pic_num += 1
+
             # print(f"转换完成，JSON 文件保存在 {label_full_path}")
+
     return pic_num
 
 
@@ -137,23 +140,29 @@ if __name__ == "__main__":
     info_log = ""
     pic_num = 0
     for dataset in g_dataset_list:
+        dataset_name = dataset["prefix"]
+        print(f"开始转换数据集 {dataset_name}")
+        output_dir = os.path.join(g_output_dir, dataset_name)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         dataset_pic_num = 0
         if len(dataset["sub_dir_list"]) > 0:
             for sub_dir in dataset["sub_dir_list"]:
+
                 image_dir = os.path.join(dataset["image_dir"], sub_dir)
 
                 annotation_dir = os.path.join(
                     dataset["annotation_dir"], sub_dir)
-                dataset_pic_num += convert_yolo_to_label_studio(image_dir, annotation_dir, dataset["prefix"], g_output_dir,
+                dataset_pic_num += convert_yolo_to_label_studio(image_dir, annotation_dir, dataset_name, output_dir,
                                                                 dataset["class_name_list"])
 
         else:
-            dataset_pic_num += convert_yolo_to_label_studio(dataset["image_dir"], dataset["annotation_dir"], dataset["prefix"],
-                                                            g_output_dir, dataset["class_name_list"])
-        print(f"数据集 {dataset['prefix']} 转换完成，共 {dataset_pic_num} 张图片")
-        info_log += f"数据集 {dataset['prefix']} 转换完成，共 {dataset_pic_num} 张图片\n"
+            dataset_pic_num += convert_yolo_to_label_studio(dataset["image_dir"], dataset["annotation_dir"], dataset_name,
+                                                            output_dir, dataset["class_name_list"])
+        print(f"数据集 {dataset_name} 转换完成，共 {dataset_pic_num} 张图片")
         pic_num += dataset_pic_num
     print(f"所有数据集转换完成，共 {pic_num} 张图片")
+
     info_log += f"所有数据集转换完成，共 {pic_num} 张图片\n"
 
     with open(os.path.join(g_output_dir, "export_info.txt"), "w") as f:
