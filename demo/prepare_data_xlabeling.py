@@ -81,7 +81,7 @@ def prepare_dataset(datadir, out_dir):
         return
     # 分割训练集和验证集
     train_val_files, test_files = train_test_split(
-        label_files, test_size=0.2, random_state=42)
+        label_files, test_size=0.01, random_state=42)
     train_files, val_files = train_test_split(
         train_val_files, test_size=0.2, random_state=42)
     write_label_file(train_files, out_dir, "train")
