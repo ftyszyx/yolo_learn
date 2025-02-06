@@ -1,8 +1,8 @@
+import torch
+from ultralytics import YOLO
 import os
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-from ultralytics import YOLO
-import torch
 
 
 def train_model():
@@ -13,7 +13,7 @@ def train_model():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     # 使用更大的模型
-    model = YOLO("yolov5l.pt")  # 从n改为m，使用更大的模型
+    model = YOLO("yolo11n.pt")  # 从n改为m，使用更大的模型
 
     # 开始训练
     results = model.train(

@@ -50,6 +50,7 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
         if filename.endswith(".txt"):
             image_name = filename[:-4] + ".jpg"  # 或者 .png, 根据你的图像格式修改
             image_path = os.path.join(image_dir, image_name)
+            image_dest_name = out_prefix+"_"+image_name
             # 检查图像文件是否存在
             if not os.path.exists(image_path):
                 image_name = filename[:-4] + ".png"  # 或者 .png, 根据你的图像格式修改
@@ -59,6 +60,7 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
                     continue
             # print(f"开始转换 {image_name} path:{image_path}")
             label_file_name = image_name[:-4]+".json"
+            label_dest_name = out_prefix+"_"+label_file_name
             label_full_path = os.path.join(image_dir, label_file_name)
             annotation_path = os.path.join(annotation_dir, filename)
             # 获取图像尺寸
@@ -84,8 +86,11 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
                         bbox_width *= width
                         bbox_height *= height
                         # 计算左上角坐标
-                        x = center_x - bbox_width / 2
-                        y = center_y - bbox_height / 2
+                        x = round(center_x - bbox_width / 2, 2)
+                        y = round(center_y - bbox_height / 2, 2)
+                        bbox_width = round(bbox_width, 2)
+                        bbox_height = round(bbox_height, 2)
+
                         annotations.append({
                             "label": class_name_list[int(class_id)],
                             "shape_type": "rectangle",
@@ -99,23 +104,30 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
                     else:
                         class_id, x1, y1, x2, y2, x3, y3, x4, y4 = map(
                             float, linearr)
+                        x1 = round(x1*width, 2)
+                        y1 = round(y1*height, 2)
+                        x2 = round(x2*width, 2)
+                        y2 = round(y2*height, 2)
+                        x3 = round(x3*width, 2)
+                        y3 = round(y3*height, 2)
+                        x4 = round(x4*width, 2)
+                        y4 = round(y4*height, 2)
                         annotations.append({
                             "label": class_name_list[int(class_id)],
                             "shape_type": "rectangle",
                             "flags": {},
-                            "points": [[x1*width, y1*height], [x2*width, y2*height], [x3*width, y3*height], [x4*width, y4*height]],
+                            "points": [[x1, y1], [x2, y2], [x3, y3], [x4, y4]],
                             "group_id": None,
                             "description": None,
                             "difficult": False,
                             "attributes": {}
-
                         })
                         # 构建 Label Studio JSON 格式
             label_studio_json = {
                 "version": "2.5.3",
                 "flags": {},
                 "shapes": [],
-                "imagePath": image_name,
+                "imagePath": image_dest_name,
                 "imageData": None,
                 "imageHeight": height,
                 "imageWidth": width,
@@ -126,9 +138,9 @@ def convert_yolo_to_label_studio(image_dir, annotation_dir, out_prefix, out_dir,
                 label_studio_json["shapes"].append(annotation)
             json.dump(label_studio_json, open(label_full_path, "w"), indent=4)
             shutil.copyfile(image_path, os.path.join(
-                out_dir, out_prefix+"_"+image_name))
+                out_dir, image_dest_name))
             shutil.copyfile(label_full_path, os.path.join(
-                out_dir, out_prefix+"_"+label_file_name))
+                out_dir, label_dest_name))
             pic_num += 1
 
             # print(f"转换完成，JSON 文件保存在 {label_full_path}")

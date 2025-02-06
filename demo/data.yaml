@@ -1,5 +1,7 @@
 train: "D:\\work\\github\\yolo_learn\\demo\\datasets\\train"
 val: "D:\\work\\github\\yolo_learn\\demo\\datasets\\val"
-# names: ["hulan", "paishuibuchang", "zhaoming"]
 names:
-  0: kengcao
+  0: 纵向裂缝
+  1: 横向裂缝
+  2: 龟裂
+  3: 坑洞
