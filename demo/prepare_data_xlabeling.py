@@ -42,20 +42,16 @@ def write_label_file(label_filelist, out_dir, sub_name):
                         continue
                     class_id = g_class_2_label_map[label]
                     points = shape["points"]
-                    x1, y1 = points[0]
-                    x2, y2 = points[1]
-                    x3, y3 = points[2]
-                    x4, y4 = points[3]
-                    x1 = round(x1/image_width, 2)
-                    y1 = round(y1/image_height, 2)
-                    x2 = round(x2/image_width, 2)
-                    y2 = round(y2/image_height, 2)
-                    x3 = round(x3/image_width, 2)
-                    y3 = round(y3/image_height, 2)
-                    x4 = round(x4/image_width, 2)
-                    y4 = round(y4/image_height, 2)
+                    mid_x = (points[0][0] + points[1][0]) / 2
+                    mid_y = (points[0][1] + points[3][1]) / 2
+                    width = points[1][0] - points[0][0]
+                    height = points[3][1] - points[0][1]
+                    mid_x = round(mid_x/image_width, 6)
+                    mid_y = round(mid_y/image_height, 6)
+                    width = round(width/image_width, 6)
+                    height = round(height/image_height, 6)
                     f.write(
-                        f"{class_id} {x1} {y1} {x2} {y2} {x3} {y3} {x4} {y4}\n")
+                        f"{class_id} {mid_x} {mid_y} {width} {height}\n")
                 # print(f"write label file:{label_text_file}")
                 f.close()
 
