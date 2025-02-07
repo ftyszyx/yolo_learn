@@ -168,3 +168,4 @@ result.jpg
 /demo_coco/runs/
 **/datasets/
 **/runs
+**.onnx

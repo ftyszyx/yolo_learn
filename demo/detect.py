@@ -35,7 +35,9 @@ def cv2AddChineseText(img, text, position, textColor=(0, 0, 255), textSize=30):
 
 def detect_cracks(image_path):
     # 加载训练好的模型
-    model = YOLO("runs/detect/crack_detection14/weights/best.pt")
+    # model = YOLO("runs/detect/crack_detection14/weights/best.pt")
+    # model = YOLO("yolo11n.pt")
+    model = YOLO("yolo11s.pt")
 
     # 读取图片
     image = cv2.imread(image_path)
@@ -66,9 +68,9 @@ def detect_cracks(image_path):
             # 添加标签
             label = f"{class_name} {conf:.2f}"
             print(f'label:{class_name}  conf:{conf:.2f} id:{cls} ')
-            # cv2.putText(image, label, (x1, y1 - 10),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-            image = cv2AddChineseText(image, label, (x1, y1 - 30))
+            cv2.putText(image, label, (x1, y1 - 10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+            # image = cv2AddChineseText(image, label, (x1, y1 - 30))
 
     # 保存结果
     output_path = "result.jpg"
@@ -77,6 +79,6 @@ def detect_cracks(image_path):
 
 
 if __name__ == "__main__":
-    # image_path = "./datasets/val/images/5d32bffc-DSCN0957.JPG"
-    image_path = "./test/test1.jpg"
+    image_path = "./test/test2.jpg"
+    # image_path = "./test/test1.jpg"
     detect_cracks(image_path)

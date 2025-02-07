@@ -16,8 +16,13 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 
+set(USE_CUDA 0)
+set(ONNXRUNTIME_VERSION 1.20.1) 
+set(LINUX TRUE)
+
 # -------------- Compile CUDA for FP16 inference if needed  ------------------#
 option(USE_CUDA "Enable CUDA support" ON)
+
 if (NOT APPLE AND USE_CUDA)
     find_package(CUDA REQUIRED)
     include_directories(${CUDA_INCLUDE_DIRS})
@@ -29,7 +34,7 @@ endif ()
 # -------------- ONNXRUNTIME  ------------------#
 
 # Set ONNXRUNTIME_VERSION
-set(ONNXRUNTIME_VERSION 1.15.1)
+
 
 if (WIN32)
     if (USE_CUDA)

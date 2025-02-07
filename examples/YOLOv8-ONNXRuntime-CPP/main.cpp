@@ -8,6 +8,11 @@
 void Detector(YOLO_V8*& p) {
     std::filesystem::path current_path = std::filesystem::current_path();
     std::filesystem::path imgs_path = current_path / "images";
+    std::filesystem::path result_path = current_path / "result";
+    if (!std::filesystem::exists(result_path))
+    {
+        std::filesystem::create_directory(result_path);
+    }
     for (auto& i : std::filesystem::directory_iterator(imgs_path))
     {
         if (i.path().extension() == ".jpg" || i.path().extension() == ".png" || i.path().extension() == ".jpeg")
@@ -50,9 +55,13 @@ void Detector(YOLO_V8*& p) {
 
             }
             std::cout << "Press any key to exit" << std::endl;
-            cv::imshow("Result of Detection", img);
-            cv::waitKey(0);
-            cv::destroyAllWindows();
+            //get img_path name
+            std::string img_name = img_path.substr(img_path.find_last_of("/") + 1);
+            //save the image
+            cv::imwrite(result_path / img_name, img);
+            //cv::imshow("Result of Detection", img);
+            //cv::waitKey(0);
+            //cv::destroyAllWindows();
         }
     }
 }
@@ -178,9 +187,10 @@ void DetectTest()
 void ClsTest()
 {
     YOLO_V8* yoloDetector = new YOLO_V8;
-    std::string model_path = "cls.onnx";
+    std::string model_path = "yolov8n.onnx";
     ReadCocoYaml(yoloDetector);
-    DL_INIT_PARAM params{ model_path, YOLO_CLS, {224, 224} };
+    DL_INIT_PARAM params{ model_path, YOLO_CLS, {640,640} };
+
     yoloDetector->CreateSession(params);
     Classifier(yoloDetector);
 }
@@ -188,6 +198,6 @@ void ClsTest()
 
 int main()
 {
-    //DetectTest();
-    ClsTest();
+    DetectTest();
+    //ClsTest();
 }
