@@ -97,6 +97,7 @@ configure_file(coco.yaml ${CMAKE_CURRENT_BINARY_DIR}/coco.yaml COPYONLY)
 
 # Copy yolov8n.onnx file to the same folder of the executable file
 configure_file(yolov8n.onnx ${CMAKE_CURRENT_BINARY_DIR}/yolov8n.onnx COPYONLY)
+configure_file(yolo11s.onnx ${CMAKE_CURRENT_BINARY_DIR}/yolo11s.onnx COPYONLY)
 
 # Create folder name images in the same folder of the executable file
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

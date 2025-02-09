@@ -162,7 +162,7 @@ void DetectTest()
     DL_INIT_PARAM params;
     params.rectConfidenceThreshold = 0.1;
     params.iouThreshold = 0.5;
-    params.modelPath = "yolov8n.onnx";
+    params.modelPath = "yolo11s.onnx";
     params.imgSize = { 640, 640 };
 #ifdef USE_CUDA
     params.cudaEnable = true;

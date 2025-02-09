@@ -169,3 +169,4 @@ result.jpg
 **/datasets/
 **/runs
 **.onnx
+examples/YOLOv8-CPP-Inference/images

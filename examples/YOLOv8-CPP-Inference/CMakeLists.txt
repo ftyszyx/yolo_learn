@@ -5,11 +5,11 @@ project(Yolov8CPPInference VERSION 0.1)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # CUDA
-set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda")
-find_package(CUDA 11 REQUIRED)
+# set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda")
+# find_package(CUDA 11 REQUIRED)
 
-set(CMAKE_CUDA_STANDARD 11)
-set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+# set(CMAKE_CUDA_STANDARD 11)
+# set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 # !CUDA
 
 # OpenCV
