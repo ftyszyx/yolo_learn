@@ -170,3 +170,6 @@ result.jpg
 **/runs
 **.onnx
 examples/YOLOv8-CPP-Inference/images
+demo/best_rknn_model
+demo/down_rknn
+demo/yolo11n_rknn_model

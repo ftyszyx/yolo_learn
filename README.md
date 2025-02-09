@@ -30,3 +30,11 @@ pip install -e . -i https://mirrors.aliyun.com/pypi/simple/
 ```
 pytest tests/test_python.py
 ```
+
+
+## rknn tookit安装
+需要linux环境
+https://docs.radxa.com/rock5/rock5c/app-development/rknn_install
+参考这个导出rknn
+https://docs.radxa.com/zero/zero3/app-development/rknn_ultralytics
+
