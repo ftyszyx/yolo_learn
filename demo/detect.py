@@ -7,44 +7,17 @@ from PIL import Image, ImageDraw, ImageFont
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 
-def cv2AddChineseText(img, text, position, textColor=(0, 0, 255), textSize=30):
-    """
-    在图片上添加中文文字
-    :param img: OpenCV图片（numpy.ndarray）
-    :param text: 添加的文字
-    :param position: 文字添加的位置
-    :param textColor: 文字颜色
-    :param textSize: 文字大小
-    :return: 添加文字后的图片
-    """
-    if isinstance(img, np.ndarray):
-        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-
-    # 创建一个可以在给定图像上绘图的对象
-    draw = ImageDraw.Draw(img)
-
-    # 设置字体和大小
-    fontStyle = ImageFont.truetype("huawen.ttf", textSize, encoding="utf-8")
-
-    # 绘制文字
-    draw.text(position, text, textColor, font=fontStyle)
-
-    # 转换回OpenCV格式
-    return cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
-
-
 def detect_cracks(image_path):
     # 加载训练好的模型
-    # model = YOLO("runs/detect/crack_detection14/weights/best.pt")
+    model = YOLO("runs/detect/crack_detection4/weights/best.pt")
     # model = YOLO("yolo11n.pt")
-    model = YOLO("yolo11s.pt")
+    # model = YOLO("yolo11s.pt")
 
     # 读取图片
     image = cv2.imread(image_path)
     if image is None:
         print(f"无法读取图片: {image_path}")
         return
-
     # 运行检测
     results = model(image)
 
@@ -70,7 +43,6 @@ def detect_cracks(image_path):
             print(f'label:{class_name}  conf:{conf:.2f} id:{cls} ')
             cv2.putText(image, label, (x1, y1 - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-            # image = cv2AddChineseText(image, label, (x1, y1 - 30))
 
     # 保存结果
     output_path = "result.jpg"
@@ -79,6 +51,6 @@ def detect_cracks(image_path):
 
 
 if __name__ == "__main__":
-    image_path = "./test/test2.jpg"
-    # image_path = "./test/test1.jpg"
+    # image_path = "./test/test2.jpg"
+    image_path = "./test/test1.jpg"
     detect_cracks(image_path)

@@ -30,7 +30,7 @@ def train_model():
         print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     # 使用更大的模型
-    model = YOLO("yolo11m.pt")  # 从n改为m，使用更大的模型
+    model = YOLO("yolo11n.pt")  # 从n改为m，使用更大的模型
 
     # 开始训练
     results = model.train(
@@ -40,12 +40,12 @@ def train_model():
         batch=16,  # 减小batch size以适应更大的模型
         name="crack_detection",
         # 学习率调整
-        lr0=0.001,  # 降低初始学习率
-        lrf=0.0001,  # 降低最终学习率
+        lr0=0.005,  # 降低初始学习率
+        lrf=0.001,  # 降低最终学习率
 
         conf=0.001,  # 降低置信度阈值，训练时检测更多目标
         hsv_h=0.02,  # 增加hsv_h以增加颜色变化
-        optimizer="NAdam",  # 使用自动优化器 默认就是auto
+        # optimizer="NAdam",  # 使用自动优化器 默认就是auto
     )
 
     print("训练完成！")

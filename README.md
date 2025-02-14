@@ -19,16 +19,28 @@ conda create -n yolo python=3.10
 conda activate yolo
 ```
 
-install as edit mode
+<!-- install yolo as edit mode(源码安装)
 
 ```
 pip install -e . -i https://mirrors.aliyun.com/pypi/simple/
+``` -->
+
+install cuda support 
+
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+```
+
+install yolo
+
+```
+pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 ```
 
 ## run test
 
 ```
-pytest tests/test_python.py
+python tools/test_cuda.py
 ```
 
 
