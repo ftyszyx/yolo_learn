@@ -8,10 +8,14 @@ g_class_2_label_map = {
     "横向裂缝": 1,
     "龟裂": 2,
     "坑洞": 3,
+    "Alligator crack": 2,
+    "Longitudinal crack": 0,
+    "Pothole": 3,
+    "Transverse crack": 1,
 }
 g_datalist = [
-    "F:/BaiduNetdiskDownload/train_data/Japan_road",
-    "F:/BaiduNetdiskDownload/train_data/my_label"
+    "E:/BaiduNetdiskDownload/train_data/Japan_road",
+    "E:/BaiduNetdiskDownload/train_data/airplane_uav",
 ]
 
 

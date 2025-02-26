@@ -44,6 +44,12 @@ python tools/test_cuda.py
 ```
 
 
+## export rknn
+需要先将pt转成onnx（用https://github.com/airockchip/ultralytics_yolo11.git）去转
+再将onnx转成krnn.
+https://blog.csdn.net/zhangqian_1/article/details/142722526.
+
+
 ## rknn tookit安装
 需要linux环境
 https://docs.radxa.com/rock5/rock5c/app-development/rknn_install

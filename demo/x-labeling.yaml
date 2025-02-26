@@ -1,7 +1,10 @@
 type: yolo11
-name: yolo11s-r20240930
-display_name: yolo_mydetect4
-model_path: D:/work/github/yolo_learn/demo/runs/detect/crack_detection4/weights/best.onnx
+name: yolo11n-r20240930
+display_name: YOLOv11n THU-MIG
+#model_path: D:/work/github/yolo_learn/demo/runs/detect/crack_detection4/weights/best.onnx
+model_path: D:/opensource/ai/rknn_model_zoo/best.onnx
+# model_path: D:/opensource/ai/airockchip_yolo11/yolo11n.onnx
+# model_path: D:/work/github/yolo_learn/demo/best.onnx
 nms_threshold: 0.45
 confidence_threshold: 0.25
 classes:

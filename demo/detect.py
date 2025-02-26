@@ -9,7 +9,8 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 def detect_cracks(image_path):
     # 加载训练好的模型
-    model = YOLO("runs/detect/crack_detection4/weights/best.pt")
+    model = YOLO("runs/detect/crack_detection8/weights/best.pt")
+    # model = YOLO("best_yolo8n.pt")
     # model = YOLO("yolo11n.pt")
     # model = YOLO("yolo11s.pt")
 
@@ -52,5 +53,6 @@ def detect_cracks(image_path):
 
 if __name__ == "__main__":
     # image_path = "./test/test2.jpg"
-    image_path = "./test/test1.jpg"
+    image_path = "./test/4.jpg"
+    # image_path = "./test/mypic2.jpg"
     detect_cracks(image_path)
