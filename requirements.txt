@@ -5,7 +5,9 @@ pillow
 scikit-image
 PyYAML
 scikit-learn
-labelImg
 onnx
 onnxruntime
 onnxslim
+torch 
+torchvision 
+torchaudio
