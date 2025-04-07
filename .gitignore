@@ -174,3 +174,6 @@ demo/best_rknn_model
 demo/down_rknn
 demo/yolo11n_rknn_model
 demo/test
+
+demo/output*
+demo/model*
